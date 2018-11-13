@@ -1,0 +1,130 @@
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Calibri, sans-serif;
+    background-color: #aeffff;
+    text-align: center;
+}
+
+.form-with-buttons {
+    text-align: center;
+}
+
+form {
+    display: inline-block;
+    vertical-align: middle;
+    width: 40%;
+    max-width: 350px;
+    text-align: center;
+    margin: 1rem;
+    padding: 1rem;
+    /*background: radial-gradient(ellipse, #ccffee 60%, #89d2ff);*/
+    background-color: #89d2ff;
+    border-radius: 16px;
+    box-shadow: 2px 2px 4px 2px rgba(0,0,0,.5);
+}
+
+.text-col,
+.input-col {
+    display: inline-block;
+    text-align: right;
+    vertical-align: top;
+    margin: auto;
+}
+
+.text-col {
+    width: 25%;
+}
+
+.input-col {
+    width: 50%;
+}
+
+label, input {
+    display: block;
+    margin: 0 .3rem;
+    padding: .5rem;
+    border-radius: 8px;
+    border: none;
+}
+
+label {
+    padding: .3rem 0;
+}
+
+input:focus {
+    outline: none;
+}
+
+.buttons {
+    display: inline-block;
+    vertical-align: middle;
+    width: 20%;
+    text-align: center;
+    background-color: #89d2ff;
+    border-radius: 16px;
+    box-shadow: 2px 2px 4px 2px rgba(0,0,0,.5);
+    max-width: 500px;
+    margin: 1rem;
+}
+
+button {
+    display: inline-block;
+    width: 80%;
+    vertical-align: middle;
+    margin: .5rem auto;
+    padding: .5rem 1rem;
+    border: 1px solid dimgray;
+    border-radius: 16px;
+    background-color: #ccffff;
+    cursor: pointer;
+    box-shadow: 1px 1px 2px 1px rgba(0,0,0,.5);
+}
+
+button:active,
+button:focus {
+    outline: none;
+}
+
+ /*button:hover,*/
+button:active {
+    box-shadow: none;
+}
+
+.info-with-comments {
+    width: 80%;
+    margin: 2rem auto;
+}
+
+.info, #comments {
+    display: inline-block;
+    vertical-align: top;
+    background-color: #89d2ff;
+    border-radius: 16px;
+    box-shadow: 2px 2px 4px 2px rgba(0,0,0,.5);
+    width: 50%;
+    margin: 0 1rem;
+    padding: .5rem;
+}
+
+.info {
+    width: 30%;
+}
+
+#json, #done, #comments > ul {
+    /*display: inline-block;*/
+    background-color: #ccffff;
+    border-radius: 16px;
+    padding: .5rem 1rem;
+    width: auto;
+    margin: 1rem auto;
+}
+
+#comments > ul {
+    text-align: left;
+    list-style: none;
+    padding: 1rem 2rem;
+}

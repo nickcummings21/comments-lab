@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=yes, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <link rel="stylesheet" href="main.css">
+
+    <title>Document</title>
+</head>
+<body>
+
+    <h2>Simple Comment App</h2>
+
+    <div class="form-with-buttons">
+        <form id="commentForm" action="" autocomplete="off">
+            <div>
+                <div class="text-col">
+                    <label for="name">Name: </label>
+                </div>
+                <div class="input-col">
+                    <input type="text" id="name" placeholder="Name"><br>
+                </div>
+            </div>
+            <div>
+                <div class="text-col">
+                    <label for="comment">Comment: </label>
+                </div>
+                <div class="input-col">
+                    <input type="text" id="comment" placeholder="Comment"><br>
+                </div>
+            </div>
+        </form>
+
+        <div class="buttons">
+            <button id="postComment">Post Comment</button>
+            <button id="getComments">Get Comments</button>
+            <button id="deleteComments">Delete All</button>
+        </div>
+    </div>
+
+    <div class="info-with-comments">
+        <div class="info">
+            <h3>Request Info</h3>
+            <div id="json"></div>
+            <div id="done"></div>
+        </div>
+
+        <div id="comments">
+            <h3>Comments: </h3>
+        </div>
+    </div>
+
+    <script>
+
+        $(document).ready(function(){
+
+            $("#postComment").click(function(){
+                const myobj = {Name:$("#name").val(),Comment:$("#comment").val()};
+                const jobj = JSON.stringify(myobj);
+                $("#json").html('Request body:<br>' + jobj);
+
+                const url = "comment";
+                $.ajax({
+                    url:url,
+                    type: "POST",
+                    data: jobj,
+                    contentType: "application/json; charset=utf-8",
+                    success: function(data,textStatus) {
+                        $("#done").html('POST: ' + textStatus);
+                        // getComments(false);
+                    }
+                });
+            });
+
+            $("#getComments").click(function () {
+                getComments(true);
+            });
+
+            $("#deleteComments").click(function(){
+
+                const url = "comment";
+                $.ajax({
+                    url:url,
+                    type: "DELETE",
+                    data: {},
+                    contentType: "application/json; charset=utf-8",
+                    success: function(data,textStatus) {
+                        $("#done").html('DELETE: ' + textStatus);
+                        $("#json").html('Request body:<br>{}');
+                        // getComments(false);
+                    }
+                });
+            });
+        });
+
+        function getComments(doPostStatus) {
+            console.log("Get: "+ doPostStatus);
+
+            $.getJSON('comment', function(data) {
+                console.log(data);
+
+                let everything = "<h3>Comments: </h3><ul>";
+                for(let comment in data) {
+                    com = data[comment];
+                    everything += "<li><p><b>Name</b>: " + com.Name + "<br><b>Comment</b>: " + com.Comment + "</p></li>";
+                }
+                everything += "</ul>";
+                $("#comments").html(everything);
+            }).success(function (data, textStatus) {
+                console.log('GET success.');
+
+                if (doPostStatus) {
+                    $("#json").html('Request body:<br>{}');
+                    $("#done").html('GET: ' + textStatus);
+                }
+            });
+        }
+
+    </script>
+
+</body>
+</html>
